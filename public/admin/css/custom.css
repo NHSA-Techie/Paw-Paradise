@@ -1,0 +1,199 @@
+:root {
+    --sidebar-bg: #ffffff;
+    --sidebar-text: #f8eaea;
+    --sidebar-text-muted: #666666;
+
+    --hover-bg: #f5f7ff;
+    --hover-text: #d6a400;
+
+    --active-bg: #f0f5ff;
+    --active-text: #0056d6;
+    --active-border: #0056d6;
+
+    --border-color: #e5e7eb;
+    --background-dark: #2d3035;
+}
+
+/* =========================================Sidebar======================================= */
+#sidebar {
+    background: var(--sidebar-bg);
+    min-height: 100vh;
+    border-right: 1px solid var(--border-color);
+    padding-top: 20px;
+}
+
+/* Add spacing between each sidebar menu item */
+#sidebar ul.list-unstyled > li {
+    margin-bottom: 15px; /* adjust the number as you like */
+}
+
+/* Heading */
+#sidebar .heading {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--sidebar-text-muted);
+    margin: 10px 20px;
+    display: block;
+}
+
+/* Top-level links */
+#sidebar ul.list-unstyled > li > a {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--sidebar-text);
+    border-radius: 8px;
+    margin: 4px 10px;
+    transition: all 0.2s ease-in-out;
+}
+
+#sidebar ul.list-unstyled > li > a i {
+    margin-right: 12px;
+    color: var(--sidebar-text-muted);
+}
+
+/* Hover */
+#sidebar ul.list-unstyled > li > a:hover {
+    background: var(--hover-bg);
+    color: var(--hover-text);
+}
+#sidebar ul.list-unstyled > li > a:hover i {
+    color: var(--hover-text);
+}
+
+/* Active */
+#sidebar ul.list-unstyled li.active > a,
+#sidebar ul.list-unstyled li > a.active {
+    background: var(--active-bg);
+    color: var(--active-text);
+    font-weight: 600;
+    border-left: 4px solid var(--active-border);
+    border-radius: 8px 0 0 8px;
+}
+#sidebar ul.list-unstyled li.active > a i,
+#sidebar ul.list-unstyled li > a.active i {
+    color: var(--active-text);
+}
+
+/* Submenu (Rooms always visible) */
+#exampledropdownDropdown {
+    display: block !important;
+    padding-left: 40px;
+}
+#exampledropdownDropdown li a {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    color: var(--sidebar-text-muted);
+}
+#exampledropdownDropdown li a:hover {
+    background: var(--hover-bg);
+    color: var(--hover-text);
+}
+
+/* Style for unclickable parent items */
+.disabled-link {
+    cursor: default;
+    pointer-events: none; /* disables clicking */
+    color: var(--sidebar-text-muted) !important; /* make it look like a label */
+}
+
+/* ==========================================================view=================================================== */
+/* ===== 1) BACKGROUND FIXES (kill the white frame/bottom) ===== */
+
+/* Make the app area a solid dark (match your theme).
+   If you changed these elsewhere, this will override them cleanly. */
+html,
+body {
+    background: var(--background-dark) !important;
+    min-height: 100%;
+}
+
+/* Keep the inner page sections transparent so the dark background shows through */
+.page-content,
+.page-content .page-header,
+.page-content .page-header .container-fluid,
+.content-inner {
+    background: transparent !important;
+}
+
+/* Footer: match the dark theme so you don't see a white strip at the bottom */
+footer.main-footer {
+    background: #2d3035 !important;
+    color: #bbb !important;
+    border-top: 1px solid #34373d !important;
+}
+
+/* Give content a sensible min height so it fills the viewport */
+.page-content {
+    min-height: calc(
+        100vh - 70px
+    ); /* adjust if your header is taller/shorter */
+    padding: 20px;
+}
+
+/* ===== 2) CARD LAYOUT – CENTER & RESPONSIVE ===== */
+
+/* Center the cards nicely even when there's only 1 */
+.room-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center; /* <-- centers with 1 or many cards */
+    padding: 24px;
+}
+
+/* Fixed card width for tidy rows; will wrap responsively */
+.room-card {
+    width: 340px;
+    max-width: 100%;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.room-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+}
+
+.room-body {
+    padding: 15px;
+    text-align: left;
+}
+.room-body h5 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0056d6;
+    margin-bottom: 8px;
+}
+.room-body p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 6px;
+}
+
+.room-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 15px;
+    border-top: 1px solid #eee;
+    background: #f9f9f9;
+}
+
+/* ===== 3) IMAGE HOVER ZOOM ===== */
+
+.room-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    transition: transform 0.4s ease, filter 0.3s ease;
+}
+.room-card:hover img {
+    transform: scale(1.08); /* gentle zoom */
+    filter: brightness(92%); /* slight darken for contrast */
+}
