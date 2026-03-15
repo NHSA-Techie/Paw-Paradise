@@ -4,10 +4,8 @@
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(135deg, #FF8C42 0%, #4A90E2 50%, #9013FE 100%);
       min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       margin: 0;
+      padding: 40px 0;
     }
 
     .login-wrapper {
@@ -18,6 +16,7 @@
       overflow: hidden;
       width: 950px;
       max-width: 95%;
+      margin: auto;
     }
 
     .login-left {
@@ -134,7 +133,23 @@
     }
 
     @media (max-width: 768px) {
-      .login-wrapper { flex-direction: column; }
+      .login-wrapper {
+        flex-direction: column;
+        width: 90%;
+        margin: auto;
+      }
+
+      .login-left {
+        padding: 30px 20px;
+      }
+
+      .login-right {
+        padding: 30px 20px;
+      }
+
+      .login-left h1 {
+        font-size: 28px;
+      }
     }
   </style>
 
