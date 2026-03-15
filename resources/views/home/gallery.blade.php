@@ -15,7 +15,7 @@
         <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
           <div class="gallery_img">
             <figure>
-              <img src="gallary/{{ $item->image }}" alt="Gallery image" loading="lazy"/>
+              <img src="{{ asset('gallary/'.$item->image) }}" alt="Gallery image" loading="lazy">
               <div class="overlay"></div>
             </figure>
           </div>
