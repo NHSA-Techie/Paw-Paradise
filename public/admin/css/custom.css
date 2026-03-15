@@ -154,7 +154,9 @@ footer.main-footer {
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    transition:
+        transform 0.2s ease-in-out,
+        box-shadow 0.2s ease-in-out;
 }
 .room-card:hover {
     transform: translateY(-4px);
@@ -191,9 +193,51 @@ footer.main-footer {
     width: 100%;
     height: 180px;
     object-fit: cover;
-    transition: transform 0.4s ease, filter 0.3s ease;
+    transition:
+        transform 0.4s ease,
+        filter 0.3s ease;
 }
 .room-card:hover img {
     transform: scale(1.08); /* gentle zoom */
     filter: brightness(92%); /* slight darken for contrast */
+}
+
+/* new fix or admin mobile view */
+
+@media (max-width: 1199px) {
+    nav#sidebar {
+        position: fixed !important;
+        top: 0 !important;
+        left: -260px !important;
+        margin-left: 0 !important;
+        width: 250px !important;
+        min-width: 250px !important;
+        max-width: 250px !important;
+        height: 100vh !important;
+        z-index: 9999 !important;
+        overflow-y: auto !important;
+        transition: left 0.3s ease !important;
+    }
+
+    nav#sidebar.show-mobile {
+        left: 0 !important;
+        margin-left: 0 !important;
+    }
+
+    #sidebarOverlay {
+        display: none;
+    }
+
+    #sidebarOverlay.show-mobile {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 9998;
+    }
+
+    .page-content {
+        width: 100% !important;
+        margin-left: 0 !important;
+    }
 }
