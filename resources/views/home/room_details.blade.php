@@ -43,7 +43,7 @@
             <!-- Room Info -->
             <div class="col-md-8">
                <div class="card-room">
-                  <img src="/room/{{ $room->images }}" alt="{{ $room->room_title }}">
+                  <img src="{{ asset('room/'.$room->images) }}" alt="{{ $room->room_title }}">
                   <div class="card-body">
                      <h2>{{ $room->room_title }}</h2>
                      <p>{{ $room->description }}</p>
