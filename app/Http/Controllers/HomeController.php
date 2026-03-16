@@ -47,9 +47,11 @@ class HomeController extends Controller
 
         $endDate =$request->endDate;
 
-        $isBooked = Booking ::where('room_id',$id)
-        ->where('start_date','<=', $endDate)
-        ->where('end_date','>=',$startDate)->exists();
+        $isBooked = Booking::where('room_id', $id)
+        ->whereIn('status', ['waiting', 'approve'])
+        ->where('start_date', '<=', $endDate)
+        ->where('end_date', '>=', $startDate)
+        ->exists();
 
         if($isBooked)
         {
@@ -59,7 +61,7 @@ class HomeController extends Controller
         {
             $data->start_date =$request->startDate;
 
-            $data->end_Date =$request->endDate;
+            $data->end_date = $request->endDate;
 
             $data->save();
 
