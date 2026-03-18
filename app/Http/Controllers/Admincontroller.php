@@ -180,31 +180,38 @@ class Admincontroller extends Controller
         return redirect()->back();
     }
 
-    public function approve_book($id){
- 
-        $booking = Booking::find($id);
+    
 
-        $booking->status ='approve'; //// i use this in booking.blade approve design and approve goes to database
-
+    public function approve_book($id)
+    {
+        $booking = Booking::findOrFail($id);
+        $booking->status = 'approve';
         $booking->save();
 
-        Mail::to($booking->email)->send(new BookingApprovedMail($booking)); ///if approve, send mail to user
-
-        return redirect()->back();
+        try {
+            Mail::to($booking->email)->send(new BookingApprovedMail($booking));
+            return redirect()->back()->with('message', 'Booking approved and email sent successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('message', 'Booking approved, but email could not be sent.');
+        }
     }
+    
 
-    public function reject_book($id){
- 
-        $booking = Booking::find($id);
-
-        $booking->status ='rejected'; // i use this in booking.blade reject design , reject goes to database
-
+    public function reject_book($id)
+    {
+        $booking = Booking::findOrFail($id);
+        $booking->status = 'rejected';
         $booking->save();
 
-        Mail::to($booking->email)->send(new BookingRejectedMail($booking));
-        return redirect()->back();
+        try {
+            Mail::to($booking->email)->send(new BookingRejectedMail($booking));
+            return redirect()->back()->with('message', 'Booking rejected and email sent successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('message', 'Booking rejected, but email could not be sent.');
+        }
     }
 
+ 
     // -----gallary page for admin -----
 
     public function view_gallary(){
