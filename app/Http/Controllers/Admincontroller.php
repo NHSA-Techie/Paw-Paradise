@@ -271,21 +271,24 @@ class Admincontroller extends Controller
     }
 
 
-    public function mail(Request $request,$id){
-        $data = Contact::find($id);
-        $details =[
-            // variable =comes from send)mail blade's name
-            'greeting' =>$request->greeting ,
-            'body' =>$request->body ,
-            'action_text' =>$request->action_text ,
-            'action_url' =>$request->action_url ,
-            'endline' =>$request->endline ,
+    public function mail(Request $request, $id)
+    {
+        $data = Contact::findOrFail($id);
 
+        $details = [
+            'greeting' => $request->greeting,
+            'body' => $request->body,
+            'action_text' => $request->action_text,
+            'action_url' => $request->action_url,
+            'endline' => $request->endline,
         ];
 
-        Notification::send($data,new SendEmailNotification($details));
-
-        return redirect()->back();
+        try {
+            Notification::send($data, new SendEmailNotification($details));
+            return redirect()->back()->with('message', 'Email sent successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('message', 'Message saved, but email could not be sent on server.');
+        }
     }
 
     public function delete_message($id)
